@@ -1,5 +1,7 @@
 <?php
-
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CitiesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
+    // clientes
+    Route::resource('clientes', ClientController::class);
+
+    // cities
+    Route::resource('cities', CitiesController::class);
+
+    // users
+    Route::resource('users', UserController::class);
+});
+
+
+require __DIR__.'/auth.php';
