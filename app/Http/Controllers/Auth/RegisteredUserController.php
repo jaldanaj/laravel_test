@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Password;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -46,9 +49,17 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
+        Mail::to($request['email'])->send(new WelcomeMail($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status == Password::RESET_LINK_SENT
+                    ? back()->with('status', __($status))
+                    : back()->withInput($request->only('email'))
+                            ->withErrors(['email' => __($status)]);
+
     }
 }

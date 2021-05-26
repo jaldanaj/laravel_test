@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/run-command', function () {
+    Artisan::call('migrate');
+    Artisan::call('db:seed');
+    return 'Database migration success.';
+})->name('run-command');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
