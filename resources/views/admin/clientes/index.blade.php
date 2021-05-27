@@ -14,21 +14,18 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form class="" action="{{ route('admin.clientes.index')}}" method="get">
+                    <form class="pb-3" action="{{ route('admin.clientes.index')}}" method="get">
                         {{ csrf_field()}}
                         <div class="form-group">
                             <label for="city">City*</label>
-                            <select class="" name="search" id="search" class="form-control" onchange='this.form.submit()'>
+                            <select class="mr-4 form-control-sm" name="search" id="search" class="form-control" onchange='this.form.submit()'>
                                 <option value="">Select...</option>
                                 @foreach($cities as $city)
                                     <option value="{{$city->name}}" {{ old('city') == $city->name ? "selected" : "" }}>{{$city->name}}</option>
                                 @endforeach
                             </select>
-                        </div>
                         <button class="btn btn-success" type="button" name="button" onclick="this.form.submit()">Clear filter</button>
-                    </form>
-                    <form class="" action="{{ route('admin.clientes.index')}}" method="get">
-                        {{ csrf_field()}}
+                        </div>
                     </form>
                      <div class="table-responsive">
                         <table id="mytable" class=" table table-striped table-hover datatable datatable-Permission">

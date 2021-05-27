@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container pt-4">    
+<div class="container pt-4">
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title">
@@ -39,5 +39,4 @@
         </div>
     </div>
 </div>
-
 @endsection

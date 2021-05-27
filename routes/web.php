@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::get('/run-command', function () {
     Artisan::call('migrate');
     Artisan::call('db:seed');
-    return 'Database migration success.';
+    return redirect('/login')->withStatus('Migrate and seeds loaded successfully');
 })->name('run-command');
 
 Route::get('/dashboard', function () {

@@ -54,6 +54,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="card-footer py-4">
+                    <nav class="d-flex justify-content-end" aria-label="...">
+                        {{ $cities->links() }}
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

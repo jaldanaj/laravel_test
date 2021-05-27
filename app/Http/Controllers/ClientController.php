@@ -24,7 +24,7 @@ class ClientController extends Controller
           $textoBuscador = null;
           }
         }
-        $clients = Client::Where('city','like', '%'.$textoBuscador.'%')->paginate(10);
+        $clients = Client::Where('city','like', '%'.$textoBuscador.'%')->paginate(5);
         $clients->appends(['city' => $textoBuscador]);
         $cities = Cities::orderBy('name')->get();
         return view('admin.clientes.index', compact('clients', 'cities'));
